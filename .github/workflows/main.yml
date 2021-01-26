@@ -1,0 +1,52 @@
+name: Hexo CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@master
+        with:
+          node-version: "12"
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        id: cache
+        with:
+         path: node_modules
+         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+         restore-keys: |
+          ${{ runner.os }}-node-
+           
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+        
+      - name: Setup Deploy Private Key
+        env:
+          HEXO_DEPLOY_PRIVATE_KEY: ${{ secrets.HEXO_DEPLOY_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$HEXO_DEPLOY_PRIVATE_KEY" > ~/.ssh/id_rsa 
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+        
+      - name: Setup Git Infomation
+        run: | 
+          git config --global user.name 'github-actions[bot]' 
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          
+      - name: Deploy Hexo 
+        run: |
+          npx hexo version
+          npx hexo clean
+          npx hexo g -d
