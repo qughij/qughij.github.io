@@ -1,0 +1,52 @@
+footer:
+  since: 2015
+
+creative_commons:
+  license: by-nc-sa
+  sidebar: true
+  post: true
+  language: cn
+
+scheme: Gemini
+
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  categories: /categories/ || fa fa-th
+  tags: /tags/ || fa fa-tags
+  sitemap: /sitemap.xml || fa fa-sitemap
+  commonweal: /404.html || fa fa-heartbeat
+  about: /about.html || fa fa-user
+
+menu_settings:
+  badges: true
+
+avatar:
+  url: /images/avatar.gif
+  rounded: true
+  rotated: true
+
+
+symbols_count_time:
+  separated_meta: true
+  item_text_post: true
+  item_text_total: true
+
+# Use icon instead of the symbol # to indicate the tag at the bottom of the post
+tag_icon: true
+
+related_posts:
+  enable: true
+  title: 相关文章
+  display_in_home: false
+  params:
+    maxCount: 5
+
+reading_progress:
+  enable: true
+
+baidu_site_verification: ZrBszvrdnN
+
+baidu_push: true
+
+baidu_analytics: c96ec1e496073154ae95c5885f454903
