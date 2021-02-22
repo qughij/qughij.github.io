@@ -46,7 +46,9 @@ reading_progress:
   enable: true
 
 baidu_site_verification: ZrBszvrdnN
-
 baidu_push: true
-
 baidu_analytics: c96ec1e496073154ae95c5885f454903
+
+utterances:
+  enable: true
+  repo: qughij/comments
